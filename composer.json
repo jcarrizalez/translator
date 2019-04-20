@@ -1,12 +1,16 @@
 {
-  "name":         "jcarrizalez/translator",
-  "description":  "A library for validating emails against several RFCs",
+  "name":         "laravel/translator",
+  "description": "Universal translator of [string, array, object].",
   "homepage":     "https://github.com/jcarrizalez/translator",
   "type":         "Library",
-  "keywords":     ["translator"],
-  "license":      "MIT",
+  "keywords":     ["composer","laravel","translator","traductor","lenguaje","language"],
+  "license":      "All Rights Reserved",
   "authors": [
-    {"name": "Juan -Carrizalez"}
+    {
+      "name": "Juan -Carrizalez",
+      "email": "sitgem@gmail.com"
+
+    }
   ],
   "extra": {
     "branch-alias": {
@@ -16,7 +20,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/dominicsayers/isemail"
+      "url": "https://github.com/jcarrizalez/translator.git"
     }
   ],
   "require":      {
@@ -24,12 +28,10 @@
     "doctrine/lexer": "^1.0.1"
   },
   "require-dev" :   {
-    "satooshi/php-coveralls": "^1.0.1",
-    "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-    "dominicsayers/isemail": "dev-master"
+    "phpunit/phpunit": "^4.8.35||^5.7||^6.0" 
   },
   "suggest": {
-    "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
+    "ext-intl": "PHP Universal translator of [string, array, object]"
   },
   "autoload": {
     "psr-4": {

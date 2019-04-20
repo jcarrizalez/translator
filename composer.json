@@ -10,7 +10,7 @@
   ],
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0.x-dev"
+      "dev-master": "2.0.x-dev"
     }
   },
   "repositories": [
@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Translator\\": "src/Translator" 
+      "Translator\\": "src/Translator"
     }
   },
   "autoload-dev": {

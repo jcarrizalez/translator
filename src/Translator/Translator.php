@@ -16,8 +16,6 @@ class Translator{
     
     public function __construct(){
 
-        print_r("xxxxxxxxxxxx");
-        die;
         /* USO 
             use App\Traits\Dictionary;
             $response = $this->dictionary($response);

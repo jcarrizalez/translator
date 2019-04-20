@@ -1,5 +1,5 @@
 {
-  "name":         "jcarrizalez/translator",
+  "name":         "translator/translator",
   "description":  "A library for validating emails against several RFCs",
   "homepage":     "https://github.com/jcarrizalez/translator",
   "type":         "Library",

@@ -4,7 +4,7 @@
   "homepage":     "https://github.com/jcarrizalez/translator",
   "type":         "Library",
   "keywords":     ["composer","laravel","translator","traductor","lenguaje","language"],
-  "license":      "All Rights Reserved",
+  "license":      "MIT",
   "authors": [
     {
       "name": "Juan -Carrizalez",

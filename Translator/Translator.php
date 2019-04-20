@@ -1,6 +1,6 @@
 <?php
 
-namespace Translator;
+namespace Jcarrizalez\Translator;
 
 class Translator
 {

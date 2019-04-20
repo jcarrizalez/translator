@@ -2,8 +2,6 @@
 
 namespace Jcarrizalez\Translator;
 
-//use Jcarrizalez\Translator;
-
 class Translator
 {
     /**
@@ -13,7 +11,8 @@ class Translator
 
     public function __construct()
     {
-        print_r("hola mundo");
+        print_r("hola mundo >>>>>>>>>>>\n");
+        print_r("\n");
     }
 
     /**
@@ -23,7 +22,7 @@ class Translator
      */
     public function index()
     {
-        return "Hola mundo";
+        return "Hola mundo\n";
     }
 
  

@@ -1,5 +1,5 @@
 {
-  "name":         "laravel/translator",
+  "name":         "lumen/translator",
   "description": "Universal translator of [string, array, object].",
   "homepage":     "https://github.com/jcarrizalez/translator",
   "type":         "Library",

@@ -1,10 +1,10 @@
-# Monolog - Logging for PHP [![Build Status](https://img.shields.io/travis/Seldaek/monolog.svg)](https://travis-ci.org/Seldaek/monolog)
+# Translator - for PHP [![Build Status](https://img.shields.io/travis/Seldaek/monolog.svg)](https://travis-ci.org/Seldaek/monolog)
 
 [![Total Downloads](https://img.shields.io/packagist/dt/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
 [![Latest Stable Version](https://img.shields.io/packagist/v/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
 
 
-Monolog sends your logs to files, sockets, inboxes, databases and various
+Translator sends your logs to files, sockets, inboxes, databases and various
 web services. See the complete list of handlers below. Special handlers
 allow you to build advanced logging strategies.
 
@@ -12,8 +12,8 @@ This library implements the [PSR-3](https://github.com/php-fig/fig-standards/blo
 interface that you can type-hint against in your own libraries to keep
 a maximum of interoperability. You can also use it in your applications to
 make sure you can always use another compatible logger at a later time.
-As of 1.11.0 Monolog public APIs will also accept PSR-3 log levels.
-Internally Monolog still uses its own level scheme since it predates PSR-3.
+As of 1.11.0 Translator public APIs will also accept PSR-3 log levels.
+Internally Translator still uses its own level scheme since it predates PSR-3.
 
 ## Installation
 
@@ -28,7 +28,7 @@ $ composer require monolog/monolog
 ```php
 <?php
 
-use Monolog\Logger;
+use Translator\Translator;
 use Monolog\Handler\StreamHandler;
 
 // create a log channel

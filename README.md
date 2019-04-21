@@ -216,40 +216,39 @@ trait Translator {
 
 use App\Traits\Translator;
 
-class yourClassX
-{
+class yourClassX {
+
     use Translator;
 
 	public function yourMethodXGet(){
 
 		//part of your code
-	    $your_data_example = ['product', 'call', ['colour' => 'white']];
+		$your_data_example = ['product', 'call', ['colour' => 'white']];
 
-	    //use of translator
-	    $data = $this->dictionary($your_data_example);
-	    
-	    //part of your code
-	    return response()->json($data, 200);
+		//use of translator
+		$data = $this->dictionary($your_data_example);
+
+		//part of your code
+		return response()->json($data, 200);
 	}
 
 	public function yourMethodXPostUpdate(Request $request){
 
-        //translator to all the request
-        $request = $this->dictionaryRequest($request);
+		//translator to all the request
+		$request = $this->dictionaryRequest($request);
 
-	    //part of your code
+		//part of your code
 	}
 
 	public function yourMethodX(){
 
-        //part of your code
-	    $your_data_example = ['product', 'call', ['colour' => 'white']];
+		//part of your code
+		$your_data_example = ['product', 'call', ['colour' => 'white']];
 
-	    //use of translator
+		//use of translator
 		$language = ($language==NULL)? $this->dictionaryDefault(): $language;
 		$data = $this->dictionaryDocument($your_data_example, $language);
 	}
-
 }
 ```
 
@@ -262,8 +261,8 @@ Edit your `../database/seeds/DatabaseSeeder.php` and add
 
 use App\Traits\Translator;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
+	
     use Translator;
 
     public function run(){

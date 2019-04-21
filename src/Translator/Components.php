@@ -9,10 +9,6 @@ class Components{
     public function __construct(){
 
         $this->root = $this->root();
-
-        //$this->dictionary_default = $this->readConfig('default');
-        //$this->filter_column = $this->readConfig('filter_column');
-        //$this->list_files_json = $this->ListFilesJson();
     }
 
     private function root(){
@@ -24,7 +20,7 @@ class Components{
 
         $return = [
             'seeds'=> $this->root.'/database/seeds',
-            'config'=> $this->root.'/config/dictionary',
+            'config'=> $this->root.'/translator',
             'default'=> $this->root
         ];
         return $return[$key];
@@ -32,7 +28,7 @@ class Components{
     
     public function readConfig($key=FALSE){
 
-        $config = file_get_contents($this->root().'/config/dictionary/configuration.json');
+        $config = file_get_contents($this->root().'/translator/configuration.json');
         $config = json_decode($config, TRUE);
         return ($key) ? $config[$key] : $config;
     }
@@ -251,11 +247,10 @@ class Components{
     }
 
     public  function writeFile($name, $data){
-        /*
+
         $config = $this->dir('config');
         $n_file = fopen($config.'/'.$name, "w");
         fwrite($n_file, $data);
         fclose($n_file);
-        */
     }
 }

@@ -1,6 +1,6 @@
 # Translator - for Lumen 
-[![Total Downloads](https://img.shields.io/packagist/dt/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
-[![Latest Stable Version](https://img.shields.io/packagist/v/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
+[![Total Downloads]()
+[![Latest Stable Version 2.0]()
 
 Translator is a package to generate data and to translate data:
 
@@ -72,7 +72,7 @@ es-AR.json:
     "table_b.002": "el mundo es todo"
 }
 ```
-`Description es-AR.json:` manual data and you must add the keys that are in default.json with the translation that applies
+`Description es-AR.json:` for user data and you must add the keys that are in default.json with the translation that applies
 
 en-US.json:
 ```json
@@ -95,8 +95,7 @@ pt-BR.json:
 `Description pt-BR.json:` manual data and you must add the keys that are in default.json with the translation that applies
 
 
-
-Create Traits for more control and use in `App\Traits\Translator.php`:
+Create Traits for more control and use in `/app/Traits/Translator.php`
 
 ```php
 <?php
@@ -108,14 +107,15 @@ use Translator\Build;
 
 trait Translator {
 
-	/**
+    /**
      * @return mixed
     */
 	public function dictionaryBuild(){
 	
 		(new Build())->make();
 	}
-	/**
+
+    /**
      * @return array
     */
 	public function dictionaries(){
@@ -123,12 +123,15 @@ trait Translator {
 		return (new Translator())->dictionaries();
     }
 
+    /**
+     * @return string
+    */
     public function dictionaryDefault(){
 	
 		return (new Translator())->default();
     }
    
-	/**
+    /**
      * indicative if it is going to translate in favor of the user or the system (save system as TRUE)
      *
      * @param  $data data to translation
@@ -140,7 +143,7 @@ trait Translator {
 		return (new Translator())->dictionary($data, $system);
 	}
 
-	/**
+    /**
      * @return string
     */
 	public function language(){
@@ -151,7 +154,7 @@ trait Translator {
 		return $language;
 	}
 	
-	/**
+    /**
      * @param  $request
      * @return mixed
     */
@@ -175,9 +178,11 @@ trait Translator {
 
 ## Methods
 
-`$ this-> dictionaryDefault ()` to determine the language you are sending from the headers (if it does not exist it's null)
-`$ this-> dictionary ($data)` used when we want to return a data with translation
-`$ this-> dictionaryRequest ($request)` used when we receive data in some language and it is passed to data according to default.json
+`$this->dictionaryDefault()` to determine the language you are sending from the headers (if it does not exist it's null)
+`$this->dictionary($data)` used when we want to return a data with translation
+`$this->dictionaryRequest($request)` used when we receive data in some language and it is passed to data according to default.json
+`$this->dictionaryBuild()` rewrite the file `translator/default.json` with the existing data in your database read from the seeder of your application
+
 
 
 ## Basic Usage Translator
@@ -186,11 +191,10 @@ trait Translator {
 
 	Accept-Language=es-AR
 
-Note: si no se envia Accept-Language se toma por defecto el de `../translator/configuration.json`
+`Note`: if Accept-Language is not sent, the default is `../translator/configuration.json`, also if you only send two letters as they are `en`, `pt`, `es` there are no problems only that backend will take the first language that you get with those features
+
 
 `backend`
-
-	Create Traits for greater control and use `/app/Traits/Translator.php`
 
 ```php
 <?php
@@ -236,7 +240,33 @@ class yourClassX
 
 ## Basic Usage Build
 
+-edit your `.gitignore` and add
 
+	/laravel/translator/default.json
+
+-edit your `../database/seeds/DatabaseSeeder.php` and add
+
+```php
+<?php
+
+use App\Traits\Translator;
+
+class DatabaseSeeder extends Seeder
+{
+    use Translator;
+
+    public function run(){
+
+    	//part of your code
+        $this->dictionaryBuild();
+    }
+}
+```
+
+-run your seeders
+```bash
+$ php artisan db:seed
+```
 
 ## About
 

@@ -20,9 +20,43 @@ Internally Translator still uses its own level scheme since it predates PSR-3.
 Install the latest version with
 
 ```bash
-$ composer require monolog/monolog
+$ composer require lumen/translator
 ```
+## Config
 
+Create directory "dictionary" in app/config/ :
+```bash
+$ mkdir dictionary 
+```
+Create file "dictionary" in app/config/ :
+
+```php
+<?php
+	return [
+		
+		// colocar uno de los existente en el directorio app/config/dictionary/
+		'default' => 'es-AR', 
+		//columns a usar por tabla si existe dentro de la tabla
+        'column_table' => [
+            'name', 
+            'attributes', 
+            'description'
+        ],
+        //tablas que no llevan diccionario y son omitidas por la funcion
+        'not_tables' => [
+            'locations',
+            'market_locations',
+            'market_currencies'
+        ],
+        //archivos a traducir que esten dentro de app/config como configuraciones especiales
+        'file_config' => [
+            'notifications',
+            'pdf'
+        ]
+	];
+
+
+```
 ## Basic Usage
 
 ```php

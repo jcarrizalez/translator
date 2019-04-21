@@ -14,11 +14,11 @@
   ],
   "extra": {
     "branch-alias": {
-      "dev-master": "2.0"
+      "dev-master": "2.0.x-dev"
     }
   },
   "require":      {
-    "php": ">= 5.3"
+    "php": ">= 5.5"
   },
   "require-dev" :   {
     "phpunit/phpunit": "^4.8.35||^5.7||^6.0" 

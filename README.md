@@ -18,7 +18,17 @@ Install the latest version with
 ```bash
 $ composer require lumen/translator
 ```
-
+or edit your `composer.json`
+```json
+{
+	"require": {
+        "lumen/translator": "^2.0@dev"
+    }
+}
+```
+```bash
+$ composer update
+```
 
 ## Configuration
 
@@ -93,7 +103,6 @@ pt-BR.json:
 }
 ```
 `Description pt-BR.json:` manual data and you must add the keys that are in default.json with the translation that applies
-
 
 
 Edit your `.gitignore` and add

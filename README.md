@@ -46,14 +46,13 @@ configuration.json:
     "filter_column": []
 }
 ```
-Desciption: Configuration file with
+`Desciption configuration.json:` Configuration file with
 
-	default: default language example file name "es-AR"
-	column_table: columns of the tables to read (only columns string, text, varchar*)
-	not_tables: tables that will not be translated
-	file_config: configuration translation files that are in your_app_name/config/
-	filter_column: columns with data that does not want translation
-	### Configurationdd
+	`default`: default language example file name "es-AR"
+	`column_table`: columns of the tables to read (only columns string, text, varchar*)
+	`not_tables`: tables that will not be translated
+	`file_config`: configuration translation files that are in your_app_name/config/
+	`filter_column`: columns with data that does not want translation
 
 default.json:
 ```json
@@ -63,7 +62,7 @@ default.json:
     "table_b.002": "el mundo es todo"
 }
 ```
-Description default.json: dynamic data created by the execution of seeders
+`Description default.json:` dynamic data created by the execution of seeders
 
 es-AR.json:
 ```json
@@ -73,7 +72,7 @@ es-AR.json:
     "table_b.002": "el mundo es todo"
 }
 ```
-Description es-AR.json: manual data and you must add the keys that are in default.json with the translation that applies
+`Description es-AR.json:` manual data and you must add the keys that are in default.json with the translation that applies
 
 en-US.json:
 ```json
@@ -83,7 +82,7 @@ en-US.json:
     "table_b.002": "the world is all"
 }
 ```
-Description en-US.json: manual data and you must add the keys that are in default.json with the translation that applies
+`Description en-US.json:` manual data and you must add the keys that are in default.json with the translation that applies
 
 pt-BR.json:
 ```json
@@ -93,129 +92,169 @@ pt-BR.json:
     "table_b.002": "o mundo é tudo"
 }
 ```
-Description pt-BR.json: manual data and you must add the keys that are in default.json with the translation that applies
+`Description pt-BR.json:` manual data and you must add the keys that are in default.json with the translation that applies
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Create file "dictionary" in app/config/ :
+Create Traits for more control and use in `App\Traits\Translator.php`:
 
 ```php
 <?php
-	return [
-		
-		// colocar uno de los existente en el directorio app/config/dictionary/
-		'default' => 'es-AR', 
-		//columns a usar por tabla si existe dentro de la tabla
-        'column_table' => [
-            'name', 
-            'attributes', 
-            'description'
-        ],
-        //tablas que no llevan diccionario y son omitidas por la funcion
-        'not_tables' => [
-            'locations',
-            'market_locations',
-            'market_currencies'
-        ],
-        //archivos a traducir que esten dentro de app/config como configuraciones especiales
-        'file_config' => [
-            'notifications',
-            'pdf'
-        ]
-	];
 
-
-```
-## Basic Usage
-
-```php
-<?php
+namespace App\Traits;
 
 use Translator\Translator;
-use Monolog\Handler\StreamHandler;
+use Translator\Build;
 
-// create a log channel
-$log = new Logger('name');
-$log->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
+trait Translator {
 
-// add records to the log
-$log->addWarning('Foo');
-$log->addError('Bar');
+	/**
+     * @return mixed
+    */
+	public function dictionaryBuild(){
+	
+		(new Build())->make();
+	}
+	/**
+     * @return array
+    */
+	public function dictionaries(){
+	
+		return (new Translator())->dictionaries();
+    }
+
+    public function dictionaryDefault(){
+	
+		return (new Translator())->default();
+    }
+   
+	/**
+     * indicative if it is going to translate in favor of the user or the system (save system as TRUE)
+     *
+     * @param  $data data to translation
+     * @param  $system TRUE => as in database or FALSE => user language
+     * @return mixed
+    */
+	public function dictionary($data, $system=FALSE){
+
+		return (new Translator())->dictionary($data, $system);
+	}
+
+	/**
+     * @return string
+    */
+	public function language(){
+		
+		$languageC = new Translator();
+		$language = $languageC->language();
+        $language = $languageC->validateLanguage($language);
+		return $language;
+	}
+	
+	/**
+     * @param  $request
+     * @return mixed
+    */
+	public function dictionaryRequest($request){
+
+		return (new Translator())->dictionaryRequest($request);
+    }
+
+    /**
+     * Translation method indicating the language of the system
+     * @param  $data
+     * @param  $language
+     * @return mixed
+    */
+    public function dictionaryDocument($data, $language){
+
+		return (new Translator())->dictionaryDocument($data, $language);
+    }
+}
 ```
 
-## Documentation
+## Methods
 
-- [Usage Instructions](doc/01-usage.md)
-- [Handlers, Formatters and Processors](doc/02-handlers-formatters-processors.md)
-- [Utility classes](doc/03-utilities.md)
-- [Extending Monolog](doc/04-extending.md)
+`$ this-> dictionaryDefault ()` to determine the language you are sending from the headers (if it does not exist it's null)
+`$ this-> dictionary ($data)` used when we want to return a data with translation
+`$ this-> dictionaryRequest ($request)` used when we receive data in some language and it is passed to data according to default.json
 
-## Third Party Packages
 
-Third party handlers, formatters and processors are
-[listed in the wiki](https://github.com/Seldaek/monolog/wiki/Third-Party-Packages). You
-can also add your own there if you publish one.
+## Basic Usage Translator
+
+`frontend` en las headers
+
+	Accept-Language=es-AR
+
+Note: si no se envia Accept-Language se toma por defecto el de `../translator/configuration.json`
+
+`backend`
+
+	Create Traits for greater control and use `/app/Traits/Translator.php`
+
+```php
+<?php
+
+use App\Traits\Translator;
+
+class yourClassX
+{
+    use Translator;
+
+	public function yourMethodXGet(){
+
+		//part of your code
+	    $your_data_example = ['producto','llamada',['color'=>'blanca']];
+
+	    //use of translator
+	    $data = $this->dictionary($your_data_example);
+	    
+	    //part of your code
+	    return response()->json($data, 200);
+	}
+
+	public function yourMethodXPostUpdate(Request $request){
+
+        //translator to all the request
+        $request = $this->dictionaryRequest($request);
+
+	    //part of your code
+	}
+
+	public function yourMethodX(){
+
+        //part of your code
+	    $your_data_example = ['producto','llamada',['color'=>'blanca']];
+
+	    //use of translator
+		$language = ($language==NULL)? $this->dictionaryDefault(): $language;
+		$data = $this->dictionaryDocument($your_data_example, $language);
+	}
+
+}
+```
+
+## Basic Usage Build
+
+
 
 ## About
 
 ### Requirements
 
-- Monolog works with PHP 5.3 or above, and is also tested to work with HHVM.
-
-### Submitting bugs and feature requests
-
-Bugs and feature request are tracked on [GitHub](https://github.com/Seldaek/monolog/issues)
+- Translator works with PHP 5.3 or higher.
 
 ### Framework Integrations
 
-- Frameworks and libraries using [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
-  can be used very easily with Monolog since it implements the interface.
-- [Symfony2](http://symfony.com) comes out of the box with Monolog.
-- [Silex](http://silex.sensiolabs.org/) comes out of the box with Monolog.
-- [Laravel 4 & 5](http://laravel.com/) come out of the box with Monolog.
-- [Lumen](http://lumen.laravel.com/) comes out of the box with Monolog.
-- [PPI](http://www.ppi.io/) comes out of the box with Monolog.
-- [CakePHP](http://cakephp.org/) is usable with Monolog via the [cakephp-monolog](https://github.com/jadb/cakephp-monolog) plugin.
-- [Slim](http://www.slimframework.com/) is usable with Monolog via the [Slim-Monolog](https://github.com/Flynsarmy/Slim-Monolog) log writer.
-- [XOOPS 2.6](http://xoops.org/) comes out of the box with Monolog.
-- [Aura.Web_Project](https://github.com/auraphp/Aura.Web_Project) comes out of the box with Monolog.
-- [Nette Framework](http://nette.org/en/) can be used with Monolog via [Kdyby/Monolog](https://github.com/Kdyby/Monolog) extension.
-- [Proton Micro Framework](https://github.com/alexbilbie/Proton) comes out of the box with Monolog.
+- Frameworks and libraries using [PSR-3](https://github.com/jcarrizalez/translator)
+- [Laravel 4 & 5](http://laravel.com/) to integrate.
+- [Lumen](http://lumen.laravel.com/) to integrate.
+- [CakePHP](http://cakephp.org/) is usable with Translator via the [cakephp-translator](https://github.com/jcarrizalez/translator) plugin "disabled".
 
 ### Author
 
-Jordi Boggiano - <j.boggiano@seld.be> - <http://twitter.com/seldaek><br />
-See also the list of [contributors](https://github.com/Seldaek/monolog/contributors) which participated in this project.
+Juan Carrizalez - <sitgem@gmail.com> <br />
 
 ### License
 
-Monolog is licensed under the MIT License - see the `LICENSE` file for details
-
-### Acknowledgements
-
-This library is heavily inspired by Python's [Logbook](http://packages.python.org/Logbook/)
-library, although most concepts have been adjusted to fit to the PHP world.
+Translator is licensed under the MIT License - see the `LICENSE` file for details

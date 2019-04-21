@@ -4,7 +4,7 @@
   "homepage":     "https://github.com/jcarrizalez/translator",
   "type":         "Library",
   "keywords":     ["composer","laravel","translator","traductor","lenguaje","language"],
-  "license":      "GPL",
+  "license":      "MIT",
   "authors": [
     {
       "name": "Juan -Carrizalez",
@@ -14,12 +14,11 @@
   ],
   "extra": {
     "branch-alias": {
-      "dev-master": "2.0.x-dev"
+      "master": "1.0"
     }
   },
   "require":      {
-    "php": ">= 5.5",
-    "doctrine/lexer": "^1.0.1"
+    "php": ">= 5.3"
   },
   "require-dev" :   {
     "phpunit/phpunit": "^4.8.35||^5.7||^6.0" 
@@ -36,6 +35,5 @@
     "psr-4": {
       "Translator\\": "tests/Translator"
     }
-  },
-  "packagist": true
+  }
 }

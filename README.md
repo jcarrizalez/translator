@@ -262,7 +262,7 @@ Edit your `../database/seeds/DatabaseSeeder.php` and add
 use App\Traits\Translator;
 
 class DatabaseSeeder extends Seeder {
-	
+
     use Translator;
 
     public function run(){
@@ -293,7 +293,7 @@ $ php artisan db:seed
 
 ### Author
 
-Juan Carrizalez - <sitgem@gmail.com> <br />
+Manuel Martinez - <sitgem@gmail.com> <br />
 
 ### License
 

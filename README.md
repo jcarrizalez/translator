@@ -107,72 +107,72 @@ use Translator\Build;
 
 trait Translator {
 
-    /**
-     * @return mixed
-    */
+	 /**
+	 * @return mixed
+	 */
 	public function dictionaryBuild(){
-	
+
 		(new Build())->make();
 	}
 
-    /**
-     * @return array
-    */
+	 /**
+	 * @return array
+	 */
 	public function dictionaries(){
-	
-		return (new Translator())->dictionaries();
-    }
 
-    /**
-     * @return string
-    */
-    public function dictionaryDefault(){
-	
+		return (new Translator())->dictionaries();
+	}
+
+	 /**
+	 * @return string
+	 */
+	public function dictionaryDefault(){
+
 		return (new Translator())->default();
-    }
-   
-    /**
-     * indicative if it is going to translate in favor of the user or the system (save system as TRUE)
-     *
-     * @param  $data data to translation
-     * @param  $system TRUE => as in database or FALSE => user language
-     * @return mixed
-    */
+	}
+
+	 /**
+	 * indicative if it is going to translate in favor of the user or the system (save system as TRUE)
+	 *
+	 * @param  $data data to translation
+	 * @param  $system TRUE => as in database or FALSE => user language
+	 * @return mixed
+	 */
 	public function dictionary($data, $system=FALSE){
 
 		return (new Translator())->dictionary($data, $system);
 	}
 
-    /**
-     * @return string
-    */
+	 /**
+	 * @return string
+	 */
 	public function language(){
 		
 		$languageC = new Translator();
 		$language = $languageC->language();
-        $language = $languageC->validateLanguage($language);
+	    $language = $languageC->validateLanguage($language);
 		return $language;
 	}
-	
-    /**
-     * @param  $request
-     * @return mixed
-    */
+
+	 /**
+	 * @param  $request
+	 * @return mixed
+	 */
 	public function dictionaryRequest($request){
 
 		return (new Translator())->dictionaryRequest($request);
-    }
+	}
 
-    /**
-     * Translation method indicating the language of the system
-     * @param  $data
-     * @param  $language
-     * @return mixed
-    */
-    public function dictionaryDocument($data, $language){
+	 /**
+	 * Translation method indicating the language of the system
+	 * @param  $data
+	 * @param  $language
+	 * @return mixed
+	 */
+	public function dictionaryDocument($data, $language){
 
 		return (new Translator())->dictionaryDocument($data, $language);
-    }
+	}
 }
 ```
 

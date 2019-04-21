@@ -21,10 +21,9 @@
     "php": ">= 5.5"
   },
   "require-dev" :   {
-    "phpunit/phpunit": "^4.8.35||^5.7||^6.0" 
   },
   "suggest": {
-    "ext-intl": "PHP Universal translator of [string, array, object]"
+    "ext-intl": "PHP Universal translator of ['string', 'array', 'object']"
   },
   "autoload": {
     "psr-4": {

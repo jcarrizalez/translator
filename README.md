@@ -95,6 +95,12 @@ pt-BR.json:
 `Description pt-BR.json:` manual data and you must add the keys that are in default.json with the translation that applies
 
 
+
+Edit your `.gitignore` and add
+
+	/laravel/translator/default.json
+
+
 Create Traits for more control and use in `/app/Traits/Translator.php`
 
 ```php
@@ -208,7 +214,7 @@ class yourClassX
 	public function yourMethodXGet(){
 
 		//part of your code
-	    $your_data_example = ['producto','llamada',['color'=>'blanca']];
+	    $your_data_example = ['product', 'call', ['colour' => 'white']];
 
 	    //use of translator
 	    $data = $this->dictionary($your_data_example);
@@ -228,7 +234,7 @@ class yourClassX
 	public function yourMethodX(){
 
         //part of your code
-	    $your_data_example = ['producto','llamada',['color'=>'blanca']];
+	    $your_data_example = ['product', 'call', ['colour' => 'white']];
 
 	    //use of translator
 		$language = ($language==NULL)? $this->dictionaryDefault(): $language;
@@ -240,11 +246,7 @@ class yourClassX
 
 ## Basic Usage Build
 
--edit your `.gitignore` and add
-
-	/laravel/translator/default.json
-
--edit your `../database/seeds/DatabaseSeeder.php` and add
+Edit your `../database/seeds/DatabaseSeeder.php` and add
 
 ```php
 <?php

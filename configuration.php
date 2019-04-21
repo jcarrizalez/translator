@@ -16,8 +16,8 @@ if(in_array($argv[$i], ['--config', '-c'])){
 	if (!file_exists("$dir/translator")) {
 
 		mkdir( "$dir/translator", 0777, true );
+		echo "\ncreate  dir: /translator/\n";
 	}
-	
 	createFiles("$dir/translator");
 }
 
@@ -36,6 +36,7 @@ function createFiles($dir){
 		if (!file_exists($file)) {
 			$data = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 	   		fwrite(fopen("$file", "w+b"),$data);
+			echo "create file: /translator/$key.json\n";
 		}
 	}
 }

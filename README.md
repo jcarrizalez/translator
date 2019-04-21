@@ -1,19 +1,15 @@
-# Translator - for PHP [![Build Status](https://img.shields.io/travis/Seldaek/monolog.svg)](https://travis-ci.org/Seldaek/monolog)
-
+# Translator - for Lumen 
 [![Total Downloads](https://img.shields.io/packagist/dt/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
 [![Latest Stable Version](https://img.shields.io/packagist/v/monolog/monolog.svg)](https://packagist.org/packages/monolog/monolog)
 
+Translator is a package to generate data and to translate data:
 
-Translator sends your logs to files, sockets, inboxes, databases and various
-web services. See the complete list of handlers below. Special handlers
-allow you to build advanced logging strategies.
+## Build: 
+Read the Lumen Application Seeders files and write the json files with a friendly structure for editing "see configuration"
 
-This library implements the [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
-interface that you can type-hint against in your own libraries to keep
-a maximum of interoperability. You can also use it in your applications to
-make sure you can always use another compatible logger at a later time.
-As of 1.11.0 Translator public APIs will also accept PSR-3 log levels.
-Internally Translator still uses its own level scheme since it predates PSR-3.
+## Translator: 
+Has several methods to translate array, obejct and string can receive a matrix of objects with array and the answer will be the translation of it without altering its structure
+
 
 ## Installation
 
@@ -22,12 +18,109 @@ Install the latest version with
 ```bash
 $ composer require lumen/translator
 ```
-## Config
 
-Create directory "dictionary" in app/config/ :
+
+## Configuration
+
 ```bash
-$ mkdir dictionary 
+$ php vendor/lumen/translator/configuration.php --config
 ```
+The previous command will create the following directory and files:
+
+```bash
+your_app_name/
+├── translator/
+│ ├── configuration.json
+│ ├── default.json
+│ ├── en-AR.json
+│ ├── en-US.json
+│ └── pt-BR.json
+```
+configuration.json:
+```json
+{
+    "default": "",
+    "column_table": [],
+    "not_tables": [],
+    "file_config": [],
+    "filter_column": []
+}
+```
+Desciption: Configuration file with
+
+	default: default language example file name "es-AR"
+	column_table: columns of the tables to read (only columns string, text, varchar*)
+	not_tables: tables that will not be translated
+	file_config: configuration translation files that are in your_app_name/config/
+	filter_column: columns with data that does not want translation
+	### Configurationdd
+
+default.json:
+```json
+{
+    "table_a.000": "Hola Mundo",
+    "table_b.001": "Mi nombre es",
+    "table_b.002": "el mundo es todo"
+}
+```
+Description default.json: dynamic data created by the execution of seeders
+
+es-AR.json:
+```json
+{
+    "table_a.000": "Hola Mundo",
+    "table_b.001": "Mi nombre es",
+    "table_b.002": "el mundo es todo"
+}
+```
+Description es-AR.json: manual data and you must add the keys that are in default.json with the translation that applies
+
+en-US.json:
+```json
+{
+    "table_a.000": "Hello World",
+    "table_b.001": "My name is",
+    "table_b.002": "the world is all"
+}
+```
+Description en-US.json: manual data and you must add the keys that are in default.json with the translation that applies
+
+pt-BR.json:
+```json
+{
+    "table_a.000": "Olá mundo",
+    "table_b.001": "Meu nome é",
+    "table_b.002": "o mundo é tudo"
+}
+```
+Description pt-BR.json: manual data and you must add the keys that are in default.json with the translation that applies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Create file "dictionary" in app/config/ :
 
 ```php

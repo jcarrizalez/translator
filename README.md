@@ -184,10 +184,10 @@ trait Translator {
 	 * @param  $language
 	 * @return mixed
 	 */
-    public function dictionarySetLanguage($data, $language){
+	public function dictionarySetLanguage($data, $language){
 
 		return (new Translator())->dictionarySetLanguage($data, $language);
-    }
+	}
 }
 ```
 

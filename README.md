@@ -248,8 +248,8 @@ class yourClassX {
 		//use of translator
 		$your_lenguage = 'en-US';
 		$language = isset($your_lenguage) ? $your_lenguage : $this->dictionaryDefault();
-        $language = $this->language($language);
-        $text = $this->dictionarySetLanguage($your_data_example, $language);
+		$language = $this->language($language);
+		$text = $this->dictionarySetLanguage($your_data_example, $language);
 	}
 }
 ```

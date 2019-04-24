@@ -33,16 +33,22 @@ class Translator{
 
     }
 
-    /*SECCION DE PARA OBTENER DICCIONARIO Y USOS EN GET Y REQUEST*/
-
-    public function language(){
+    public function language($value=NULL){
 
         $default = $this->dictionary_default;
 
         $dictionaries = $this->list_files_json;
 
-        $headers = !function_exists('apache_request_headers')? ['Accept-Language' => $default] : apache_request_headers();
-        $language = (array_key_exists('Accept-Language', $headers)) ? $headers['Accept-Language'] : $default;
+        if($value==NULL){
+
+            $headers = !function_exists('apache_request_headers')? ['Accept-Language' => $default] : apache_request_headers();
+
+            $language_min = (array_key_exists('accept-language', $headers)) ? $headers['accept-language'] : $default;
+            $language = (array_key_exists('Accept-Language', $headers)) ? $headers['Accept-Language'] : $language_min;
+        }
+        else{
+            $language = $value;
+        }
 
         $language_country = explode(';', $language)[0];
         $language_default = explode('-', $language_country)[0];

@@ -161,11 +161,11 @@ trait Translator {
 	 /**
 	 * @return string
 	 */
-	public function language(){
+	public function language($value = NULL){
 		
 		$languageC = new Translator();
-		$language = $languageC->language();
-	    $language = $languageC->validateLanguage($language);
+		$language = $languageC->language($value);
+        $language = $languageC->validateLanguage($language);
 		return $language;
 	}
 
@@ -184,10 +184,10 @@ trait Translator {
 	 * @param  $language
 	 * @return mixed
 	 */
-	public function dictionaryDocument($data, $language){
+    public function dictionarySetLanguage($data, $language){
 
-		return (new Translator())->dictionaryDocument($data, $language);
-	}
+		return (new Translator())->dictionarySetLanguage($data, $language);
+    }
 }
 ```
 
@@ -246,8 +246,10 @@ class yourClassX {
 		$your_data_example = ['product', 'call', ['colour' => 'white']];
 
 		//use of translator
-		$language = ($language==NULL)? $this->dictionaryDefault(): $language;
-		$data = $this->dictionaryDocument($your_data_example, $language);
+		$your_lenguage = 'en-US';
+		$language = isset($your_lenguage) ? $your_lenguage : $this->dictionaryDefault();
+        $language = $this->language($language);
+        $text = $this->dictionarySetLanguage($your_data_example, $language);
 	}
 }
 ```

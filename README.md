@@ -165,7 +165,7 @@ trait Translator {
 		
 		$languageC = new Translator();
 		$language = $languageC->language($value);
-        $language = $languageC->validateLanguage($language);
+		$language = $languageC->validateLanguage($language);
 		return $language;
 	}
 
